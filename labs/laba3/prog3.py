@@ -46,8 +46,8 @@ def read_vector(filename):
 
 if __name__ == "__main__":
     try:
-        A = read_matrix(r'a.txt')
-        b = read_vector(r'b.txt')
+        A = read_matrix(r'C:\Users\student\Desktop\vychislitelnyye-metody\labs\laba3\a.txt')
+        b = read_vector(r'C:\Users\student\Desktop\vychislitelnyye-metody\labs\laba3\b.txt')
         solution = solve_lu(A, b)
         print("Решение системы:")
         print([round(x, 6) for x in solution])
