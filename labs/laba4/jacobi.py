@@ -5,7 +5,7 @@ def jacobi(A, b, eps=0.01, max_iterations=1000):
     n = len(A)
     x = [0.0 for _ in range(n)]
     x_new = x.copy()
-    history = [x.copy()]  # Сохраняем историю значений x
+    history = [x.copy()]
 
     for iteration in range(max_iterations):
         for i in range(n):
@@ -15,9 +15,8 @@ def jacobi(A, b, eps=0.01, max_iterations=1000):
                     sum_ += A[i][j] * x[j]
             x_new[i] = (b[i] - sum_) / A[i][i]
 
-        history.append(x_new.copy())  # Сохраняем новые значения
+        history.append(x_new.copy())
 
-        # Проверка сходимости
         converged = True
         for i in range(n):
             if abs(x_new[i] - x[i]) > eps:
@@ -36,7 +35,7 @@ def jacobi(A, b, eps=0.01, max_iterations=1000):
 def seidel(A, b, eps=0.01, max_iterations=1000):
     n = len(A)
     x = [0.0 for _ in range(n)]
-    history = [x.copy()]  # Сохраняем историю значений x
+    history = [x.copy()]
 
     for iteration in range(max_iterations):
         x_new = x.copy()
@@ -45,9 +44,8 @@ def seidel(A, b, eps=0.01, max_iterations=1000):
             sum2 = sum(A[i][j] * x[j] for j in range(i + 1, n))
             x_new[i] = (b[i] - sum1 - sum2) / A[i][i]
 
-        history.append(x_new.copy())  # Сохраняем новые значения
+        history.append(x_new.copy())
 
-        # Проверка сходимости
         converged = True
         for i in range(n):
             if abs(x_new[i] - x[i]) > eps:
@@ -63,7 +61,6 @@ def seidel(A, b, eps=0.01, max_iterations=1000):
     print("Метод Зейделя: достигнуто максимальное количество итераций")
     return x, history
 
-# Исходные данные
 A = [
     [5, 2, -1],
     [-4, 7, 3],
@@ -71,18 +68,14 @@ A = [
 ]
 b = [12, 24, 9]
 
-# Решение обоими методами
 jacobi_solution, jacobi_history = jacobi(A, b)
 seidel_solution, seidel_history = seidel(A, b)
 
-# Вывод решений
 print("\nРешение методом Якоби:", jacobi_solution)
 print("Решение методом Зейделя:", seidel_solution)
 
-# Построение графиков значений переменных
 plt.figure(figsize=(12, 8))
 
-# График для метода Якоби
 plt.subplot(1, 2, 1)
 jacobi_history = np.array(jacobi_history)
 for i in range(3):
@@ -93,7 +86,6 @@ plt.title('Метод Якоби: изменение значений $x_1, x_2,
 plt.legend()
 plt.grid(True)
 
-# График для метода Зейделя
 plt.subplot(1, 2, 2)
 seidel_history = np.array(seidel_history)
 for i in range(3):
